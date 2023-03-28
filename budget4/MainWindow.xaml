@@ -1,0 +1,57 @@
+﻿<Window x:Class="budget4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:budget4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+            
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="1.1*"/>
+        </Grid.ColumnDefinitions>
+
+        <DatePicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Name ="DatePick"/>
+
+        <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0">
+            <Label Content="DataGrid" HorizontalAlignment="Center"/>
+            <DataGrid Grid.Row="2" Grid.RowSpan="2" Name ="DG" SelectionChanged="DG_SelectionChanged" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Width="100" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="TypeName" Width="140" Binding="{Binding TypeName}" />
+                    <DataGridTextColumn Header="Money" Width="70" Binding="{Binding Money}" />
+                    <DataGridCheckBoxColumn Header="IsIncome" Width="111" Binding="{Binding IsIncome, Mode=OneWay}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical">
+            <Label Content="Имя записи" HorizontalAlignment="Center"/>
+            <TextBox Name="RecordName"/>
+            <Label Content="Тип записи" HorizontalAlignment="Center"/>
+            <ComboBox Name="TypesList"/>
+            <Button Content="Добавить новый тип записи" Click="AddNewType"/>
+            <Label Content="Сумма денег" HorizontalAlignment="Center"/>
+            <TextBox Name="summma"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="3" Orientation="Vertical" VerticalAlignment="Center">
+            <Button Content="Добавить запись" Click="AddRecord"/>
+            <Button Content="Изменить выбранную запись" Click="ChangeSelectedRecord"/>
+            <Button Content="Удалить запись" Click="Delete"/>
+        </StackPanel>
+
+        <TextBlock x:Name = "total" Grid.Row="4" Grid.ColumnSpan="3" TextAlignment="Center" Text="Итог: "> </TextBlock>
+
+    </Grid>
+</Window>
